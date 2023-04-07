@@ -218,19 +218,22 @@ export async function getOpenAIAuth({
         submitP = () => page.click('button[type="submit"]')
       }
 
-      await Promise.all([
-        waitForConditionOrAtCapacity(page, () =>
-          page.waitForNavigation({
-            waitUntil: 'networkidle2',
-            timeout: timeoutMs
-          })
-        ),
-        submitP()
-      ])
+      await submitP()
+      await waitForConditionOrAtCapacity(page, () =>
+        page.waitForNavigation({
+          waitUntil: 'networkidle0',
+          timeout: timeoutMs
+        })
+      )
     } else {
       await delay(2000)
       await checkForChatGPTAtCapacity(page, { timeoutMs })
     }
+
+    await page.waitForResponse(
+      (response) => response.url().includes('api/auth/session'),
+      { timeout: timeoutMs }
+    )
 
     const pageCookies = await page.cookies()
     const cookies = pageCookies.reduce(
