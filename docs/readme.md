@@ -1,4 +1,4 @@
-chatgpt / [Exports](modules.md)
+@chatgpt-proxy/chatgpt / [Exports](modules.md)
 
 # Update January 12, 2023 <!-- omit in toc -->
 
