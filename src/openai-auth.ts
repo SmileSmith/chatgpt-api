@@ -230,10 +230,13 @@ export async function getOpenAIAuth({
       await checkForChatGPTAtCapacity(page, { timeoutMs })
     }
 
-    await page.waitForResponse(
-      (response) => response.url().includes('api/auth/session'),
-      { timeout: timeoutMs }
-    )
+    await Promise.race([
+      page.waitForResponse(
+        (response) => response.url().includes('api/auth/session'),
+        { timeout: timeoutMs }
+      ),
+      delay(30000)
+    ])
 
     const pageCookies = await page.cookies()
     const cookies = pageCookies.reduce(
