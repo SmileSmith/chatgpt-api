@@ -167,6 +167,10 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
           'oai/apps/hasSeenReleaseAnnouncement/2023-01-09',
           'true'
         )
+        window.localStorage.setItem(
+          'oai/apps/hasSeenReleaseAnnouncement/2023-03-12',
+          'true'
+        )
       })
 
       // await maximizePage(this._page)
