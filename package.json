@@ -1,9 +1,9 @@
 {
   "name": "@chatgpt-proxy/chatgpt",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "Node.js client for the unofficial ChatGPT API.",
-  "author": "Travis Fischer <travis@transitivebullsh.it>",
-  "repository": "transitive-bullshit/chatgpt-api",
+  "author": "Travis Fischer <travis@transitivebullsh.it>, SmileSmith longde_chen@163.com>",
+  "repository": "SmileSmith/chatgpt-api",
   "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
@@ -33,7 +33,8 @@
     "prepare": "husky install",
     "pre-commit": "lint-staged",
     "test": "run-p test:*",
-    "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check"
+    "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
+    "prepublish": "run-s build"
   },
   "dependencies": {
     "delay": "^5.0.0",
