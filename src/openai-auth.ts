@@ -98,7 +98,9 @@ export async function getOpenAIAuth({
       }
     }
 
-    await page.goto('https://chat.openai.com/auth/login', {
+    // Directly accessing https://chat.openai.com/auth/login will result in a 403 error for all static resources.
+    //  await page.goto('https://chat.openai.com/auth/login', {
+    await page.goto('https://chat.openai.com', {
       waitUntil: 'networkidle2'
     })
 
