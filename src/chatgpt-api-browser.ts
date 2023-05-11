@@ -15,6 +15,7 @@ import {
   minimizePage
 } from './utils'
 
+const TIMEZONE_OFFSET_MIN = new Date().getTimezoneOffset()
 const CHAT_PAGE_URL = 'https://chat.openai.com/chat'
 
 export class ChatGPTAPIBrowser extends AChatGPTAPI {
@@ -464,7 +465,7 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
       messages: [
         {
           id: messageId,
-          role: 'user',
+          author: { role: 'user' },
           content: {
             content_type: 'text',
             parts: [message]
@@ -476,7 +477,8 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
         : this._isProAccount
         ? 'text-davinci-002-render-paid'
         : 'text-davinci-002-render-sha',
-      parent_message_id: parentMessageId
+      parent_message_id: parentMessageId,
+      timezone_offset_min: TIMEZONE_OFFSET_MIN
     }
 
     if (conversationId) {

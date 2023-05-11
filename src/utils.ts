@@ -142,7 +142,6 @@ export async function browserPostEventStream(
       signal: abortController?.signal,
       headers: {
         accept: 'text/event-stream',
-        'x-openai-assistant-app-id': '',
         authorization: `Bearer ${accessToken}`,
         'content-type': 'application/json'
       }

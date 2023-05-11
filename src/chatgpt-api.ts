@@ -8,6 +8,7 @@ import { fetch } from './fetch'
 import { fetchSSE } from './fetch-sse'
 import { markdownToText } from './utils'
 
+const TIMEZONE_OFFSET_MIN = new Date().getTimezoneOffset()
 const KEY_ACCESS_TOKEN = 'accessToken'
 const USER_AGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
@@ -95,7 +96,6 @@ export class ChatGPTAPI extends AChatGPTAPI {
     this._userAgent = userAgent
     this._headers = {
       'user-agent': this._userAgent,
-      'x-openai-assistant-app-id': '',
       'accept-language': 'en-US,en;q=0.9',
       'accept-encoding': 'gzip, deflate, br',
       origin: 'https://chat.openai.com',
@@ -205,7 +205,7 @@ export class ChatGPTAPI extends AChatGPTAPI {
       messages: [
         {
           id: messageId,
-          role: 'user',
+          author: { role: 'user' },
           content: {
             content_type: 'text',
             parts: [message]
@@ -213,7 +213,8 @@ export class ChatGPTAPI extends AChatGPTAPI {
         }
       ],
       model: 'text-davinci-002-render-sha',
-      parent_message_id: parentMessageId
+      parent_message_id: parentMessageId,
+      timezone_offset_min: TIMEZONE_OFFSET_MIN
     }
 
     if (conversationId) {
