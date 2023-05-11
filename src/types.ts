@@ -156,6 +156,11 @@ export type ConversationJSONBody = {
    * The parent message ID
    */
   parent_message_id: string
+
+  /**
+   * The Client Timezone Offset
+   */
+  timezone_offset_min: number
 }
 
 export type Prompt = {
@@ -172,7 +177,9 @@ export type Prompt = {
   /**
    * The role played in the prompt
    */
-  role: Role
+  author: {
+    role: Role
+  }
 }
 
 export type PromptContent = {
