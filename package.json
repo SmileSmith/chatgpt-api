@@ -1,6 +1,6 @@
 {
   "name": "@chatgpt-proxy/chatgpt",
-  "version": "3.6.1",
+  "version": "3.7.0",
   "description": "Node.js client for the unofficial ChatGPT API.",
   "author": "Travis Fischer <travis@transitivebullsh.it>, SmileSmith longde_chen@163.com>",
   "repository": "SmileSmith/chatgpt-api",
