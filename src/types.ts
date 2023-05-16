@@ -161,6 +161,16 @@ export type ConversationJSONBody = {
    * The Client Timezone Offset
    */
   timezone_offset_min: number
+
+  /**
+   * Plugin
+   */
+  supports_modapi?: boolean
+
+  /**
+   * Plugin列表
+   */
+  plugin_ids?: string[]
 }
 
 export type Prompt = {
@@ -291,6 +301,8 @@ export type SendMessageOptions = {
   onProgress?: (partialResponse: ChatResponse) => void
   abortSignal?: AbortSignal
   model?: string
+  usePlugin?: boolean
+  pluginIds?: string[]
 }
 
 export type SendConversationMessageOptions = Omit<

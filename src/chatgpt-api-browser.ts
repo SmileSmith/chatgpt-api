@@ -31,6 +31,13 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
   protected _email: string
   protected _password: string
 
+  /**
+   * 是否是专业版账户
+   *
+   * @deprecated 已废弃的字段，不再使用
+   * @type {boolean}
+   * @memberof ChatGPTAPIBrowser
+   */
   protected _isProAccount: boolean
 
   protected _executablePath: string
@@ -106,7 +113,6 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
 
     this._email = email
     this._password = password
-    this._isProAccount = isProAccount
     this._markdown = !!markdown
     this._debug = !!debug
     this._isGoogleLogin = !!isGoogleLogin
@@ -456,6 +462,8 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
       messageId = uuidv4(),
       action = 'next',
       timeoutMs,
+      usePlugin,
+      pluginIds,
       onProgress
     } = opts
 
@@ -472,12 +480,10 @@ export class ChatGPTAPIBrowser extends AChatGPTAPI {
           }
         }
       ],
-      model: model
-        ? model
-        : this._isProAccount
-        ? 'text-davinci-002-render-paid'
-        : 'text-davinci-002-render-sha',
+      model: model ? model : 'text-davinci-002-render-sha',
       parent_message_id: parentMessageId,
+      supports_modapi: usePlugin,
+      plugin_ids: pluginIds || [],
       timezone_offset_min: TIMEZONE_OFFSET_MIN
     }
 
